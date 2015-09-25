@@ -1,18 +1,20 @@
-AS ?= nasm
+# Most supported architecture is i686-elf
+ARCH ?= i686-elf
 
-vpath %.c src
-vpath %.asm src
-vpath %.o src
+SRC := $(wildcard src/*.c)
 
-all: yasOS.bin
+PROJECT := yasOS
 
-%.o: %.asm
-	$(AS) -o $@ $< $(ASFLAGS)
+all: $(PROJECT).bin
 
-%.o: %.c
-	$(CC) -c -ffreestanding -O2 -Wall -Wextra -std=gnu99 $(CFLAGS) $(CPPFLAGS) $< -o $@
- 
-yasOS.bin: linker.ld main.o start.o scrn.o gdt.o idt.o isrs.o irq.o timer.o
-	$(CC) -T $^ -o $@ -ffreestanding -O2 -nostdlib -lgcc
+src/arch.h:
+	$(file > src/arch.h,#include "$(ARCH)/arch.h")
 
-.PHONY: all
+include src/$(ARCH)/Makefile
+
+.PHONY: all install
+
+install: all
+	ifdef DESTDIR
+		cp $(PROJECT).bin $(DESTDIR)/boot/
+	endif

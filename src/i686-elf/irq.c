@@ -1,4 +1,5 @@
 #include "system.h"
+#include "arch.h"
 
 /* These are own ISRs that point to our special IRQ handler
 *  instead of the regular 'fault_handler' function */
