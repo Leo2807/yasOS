@@ -1,4 +1,5 @@
 #include "system.h"
+#include "arch.h"
 
 unsigned char *memcpy(void *dest, const void *src, int count)
 {
@@ -64,16 +65,9 @@ void outportb (unsigned short _port, unsigned char _data)
 *  infinite loop. This will be like our 'idle' loop */
 void main()
 {
-	gdt_install();
-	
-	/* Interrupt/Exception handling */
-	idt_install();
-	isrs_install();
-	irq_install();
-	__asm__ __volatile__ ("sti"); 
+	arch_init();
 	
 	/* User I/O */
-	timer_install();
 	init_video();
 	
 	puts("Hello world!\n");

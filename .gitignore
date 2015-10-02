@@ -31,3 +31,8 @@
 
 # Debug files
 *.dSYM/
+
+# Headers (we use mkheader.py)
+*.h
+
+!src/i686-elf/start.h

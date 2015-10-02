@@ -1,4 +1,4 @@
-#include "system.h"
+#include "main.h"
 #include "arch.h"
 
 /* This will keep track of how many ticks that the system

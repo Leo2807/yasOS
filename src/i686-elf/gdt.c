@@ -1,5 +1,4 @@
-#include "system.h"
-#include "arch.h"
+#include "start.h"
 
 /* Defines a GDT entry. We say packed, because it prevents the
 *  compiler from doing things that it thinks is best: Prevent
@@ -25,10 +24,6 @@ struct gdt_ptr
 /* Our GDT, with 3 entries, and finally our special GDT pointer */
 struct gdt_entry gdt[3];
 struct gdt_ptr gp;
-
-/* This will be a function in start.asm. We use this to properly
-*  reload the new segment registers */
-extern void gdt_flush();
 
 /* Setup a descriptor in the Global Descriptor Table */
 void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran)

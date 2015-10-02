@@ -1,5 +1,5 @@
-#include "system.h"
-#include "arch.h"
+#include "main.h"
+#include "scrn.h"
 /* This is a scancode table used to layout a standard US keyboard.
 */ 
 unsigned char kbd_layout[128] =

@@ -1,5 +1,5 @@
-#include "system.h"
-#include "arch.h"
+#include "main.h"
+#include "start.h"
 
 /* Defines an IDT entry */
 struct idt_entry
@@ -25,9 +25,6 @@ struct idt_ptr
 *  "Unhandled Interrupt" exception */
 struct idt_entry idt[256];
 struct idt_ptr idtp;
-
-/* This exists in 'start.asm', and is used to load our IDT */
-extern void idt_load();
 
 /* Use this function to set an entry in the IDT. Alot simpler
 *  than twiddling with the GDT ;) */
