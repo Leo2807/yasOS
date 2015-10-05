@@ -4,6 +4,7 @@
 #include "isrs.h"
 #include "irq.h"
 #include "timer.h"
+#include "paging.h"
 /* End */
 
 void arch_init()
@@ -16,6 +17,9 @@ void arch_init()
 	isrs_install();
 	irq_install();
 	__asm__ __volatile__ ("sti");
+	
+	/* Memory */
+	paging_install();
 	
 	timer_install();
 }
