@@ -1,7 +1,7 @@
 AS ?= nasm
 CC ?= $(ARCH)-gcc
 
-LINK := linker.ld
+LINK := src/$(ARCH)/linker.ld
 A_SRC := $(wildcard src/$(ARCH)/*.c) $(wildcard src/$(ARCH)/*.asm)
 A_OBJ := $(addsuffix .o, $(basename $(A_SRC)))
 A_HEA := $(addsuffix .h, $(basename $(wildcard src/$(ARCH)/*.c)))
