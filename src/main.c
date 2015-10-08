@@ -1,5 +1,10 @@
-#include "system.h"
+#include "scrn.h"
 #include "arch.h"
+
+/* include these in header */
+/* Useful constants */
+#define KERNEL_MEMORY_OFFSET 0xC0000000
+/* end */
 
 unsigned char *memcpy(void *dest, const void *src, int count)
 {
@@ -52,6 +57,16 @@ unsigned char inportb (unsigned short _port)
     return rv;
 }
 
+const char *hexmap = "0123456789ABCDEF";
+
+void to_hex(char *num, char *hex, int count)
+{
+	for (int i = 0; i < count; i++) {
+		hex[i] = hexmap[num[i] | 0x0F];
+		hex[i] |= hexmap[num[i] >> 4] << 4;
+	}
+}
+
 /* We will use this to write to I/O ports to send bytes to devices. This
 *  will be used in the next tutorial for changing the textmode cursor
 *  position. Again, we use some inline assembly for the stuff that simply
@@ -71,6 +86,16 @@ void main()
 	init_video();
 	
 	puts("Hello world!\n");
+	
+	void *main_addr = (void *)main;
+	char hex[5];
+	char *num = (char *)&main_addr;
+	
+	to_hex(num, hex, 4);
+	hex[4] = '\0';
+	
+	puts(hex);
+	puts("\n");
 	
     for (;;);
 }

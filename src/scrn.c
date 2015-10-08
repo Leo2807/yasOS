@@ -1,5 +1,5 @@
 
-#include "system.h"
+#include "main.h"
 
 /* These define our textpointer, our background and foreground
 *  colors (attributes), and x and y cursor coordinates */
@@ -154,6 +154,6 @@ void settextcolor(unsigned char forecolor, unsigned char backcolor)
 /* Sets our text-mode VGA pointer, then clears the screen for us */
 void init_video(void)
 {
-    textmemptr = (unsigned short *)0xB8000;
+    textmemptr = (unsigned short *)(0xB8000 + KERNEL_MEMORY_OFFSET);
     cls();
 }

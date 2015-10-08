@@ -19,7 +19,6 @@ void arch_init()
 	__asm__ __volatile__ ("sti");
 	
 	/* Memory */
-	paging_install();
 	
 	timer_install();
 }
