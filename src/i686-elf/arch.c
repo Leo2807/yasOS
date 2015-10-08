@@ -4,7 +4,6 @@
 #include "isrs.h"
 #include "irq.h"
 #include "timer.h"
-#include "paging.h"
 /* End */
 
 void arch_init()
