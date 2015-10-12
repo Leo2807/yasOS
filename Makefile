@@ -23,9 +23,7 @@ src/arch.h:
 include src/$(ARCH)/Makefile
 
 install: all
-	ifdef DESTDIR
-		cp $(PROJECT).bin $(DESTDIR)/boot/
-	endif
+	if [ -d '$(DESTDIR)' ]; then cp $(PROJECT).bin $(DESTDIR)/boot/; fi
 
 clean:
 	rm -rf $(OBJ) $(A_OBJ)
