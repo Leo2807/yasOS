@@ -1,6 +1,5 @@
-OUTPUT_FORMAT("binary")
+OUTPUT_FORMAT(elf32-i386)
 ENTRY(start)
-phys = 0x00100000;
 SECTIONS
 {
  /* The kernel will live at 3GB + 1MB in the virtual
@@ -8,11 +7,10 @@ SECTIONS
     physical address space. */
   . = 0xC0100000;
    
-  .text phys : AT(ADDR(.text) - 0xC0000000) {
+  .text : AT(ADDR(.text) - 0xC0000000) {
     code = .;
     *(.text)
     *(.rodata*)
-    . = ALIGN(4096);
   }
   .data ALIGN(0x1000) : AT(ADDR(.data) - 0xC0000000)
   {
@@ -24,7 +22,6 @@ SECTIONS
   {
     bss = .;
     *(.bss)
-    . = ALIGN(4096);
   }
   end = .;
 }
