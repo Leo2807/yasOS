@@ -57,13 +57,13 @@ unsigned char inportb (unsigned short _port)
     return rv;
 }
 
-const char *hexmap = "0123456789ABCDEF";
+const char hexmap[] = "0123456789ABCDEF";
 
-void to_hex(char *num, char *hex, int count)
+void to_hex(int num, char *hex)
 {
-	for (int i = 0; i < count; i++) {
-		hex[i] = hexmap[num[i] | 0x0F];
-		hex[i] |= hexmap[num[i] >> 4] << 4;
+	for (int i = ((sizeof num) * 2 - 1); i >= 0; i--) {
+		hex[i] = hexmap[num & 0xF];
+		num >>= 4;
 	}
 }
 
@@ -86,16 +86,6 @@ void main()
 	init_video();
 	
 	puts("Hello world!\n");
-	
-	void *main_addr = (void *)main;
-	char hex[5];
-	char *num = (char *)&main_addr;
-	
-	to_hex(num, hex, 4);
-	hex[4] = '\0';
-	
-	puts(hex);
-	puts("\n");
 	
     for (;;);
 }
